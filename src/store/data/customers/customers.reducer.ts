@@ -18,8 +18,8 @@ const customersReducer: Redux.Reducer<CustomersState, CustomersAction> = (state 
             return {
                 ...state,
                 model: [...action.payload]
-            }
-        }
+            };
+        };
         default: return state;
     };
 };

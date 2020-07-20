@@ -22,9 +22,9 @@ const map = {
     state: (state: RootState) => {
         return {
             user: state.user
-        }
+        };
     }
-}
+};
 
 const connected = connect(map.state);
 

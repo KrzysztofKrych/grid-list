@@ -5,7 +5,7 @@ export const get = async (collection: string) =>
             return {
                 ...doc.data(),
                 id: doc.id
-            }
+            };
         }
     ));
 
@@ -16,7 +16,7 @@ export const getByQuery = async (collection: string, query: string, value: strin
             return {
                 ...doc.data(),
                 id: doc.id
-            }
+            };
         }
     ));
-}
+};

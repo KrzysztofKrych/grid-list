@@ -10,7 +10,7 @@ function* requestList(action: CustomersGetListActionInitModel){
         }
     }catch(error){
         console.log(error);
-    }
+    };
 }
 
 export default function* customersSaga() {

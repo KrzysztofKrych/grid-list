@@ -5,30 +5,30 @@ import { connect } from "react-redux";
 import Customer from "../../models/Customer";
 
 export interface Props {
-    customers: Customer[]
+    customers: Customer[];
 }
 
 const Main = ({customers}: Props) => {
     const handleDisplayCustomerRow = (customer: Customer, index: number) => {
         return (
             <div key={index}>{customer.name}</div>
-        )
-    }
+        );
+    };
     return (
         <List 
             items={customers} 
             displayData={handleDisplayCustomerRow} />
-    )
+    );
 };
 
 const map = {
     state: (state: RootState) => {
         return {
             customers: state.customers.model
-        }
+        };
     }
-}
+};
 
-const connected = connect(map.state)
+const connected = connect(map.state);
 
 export default connected(Main);

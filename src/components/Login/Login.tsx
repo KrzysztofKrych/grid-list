@@ -36,7 +36,7 @@ const map = {
             },
         };
     }
-}
+};
 
 const connected = connect(undefined, map.dispatch);
 
