@@ -1,13 +1,13 @@
 import Redux from "redux";
 import User from "../../../models/User";
-import UserActionType, { UserLoginActionSuccess } from "./user.actions";
+import UserActionType, { UserLoginActionSuccessModel } from "./user.actions";
 
 export const initialUserState: User = {
     isLoggedIn: false,
     email: ""
 };
 
-export type UserAction = UserLoginActionSuccess;
+export type UserAction = UserLoginActionSuccessModel;
 
 const userReducer: Redux.Reducer<User, UserAction> = (state = initialUserState, action: UserAction) => {
     switch(action.type){

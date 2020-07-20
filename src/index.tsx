@@ -7,10 +7,12 @@ import { Provider } from "react-redux";
 import store  from "./store/index";
 import { fire } from './api/firebaseConfig';
 import { userLoginActionSuccess } from './store/data/user/user.actions';
+import { customersGetListActionInit } from './store/data/customers/customers.actions';
 
 const loginCallback = async (user: firebase.User | null) => {
   if(user && user.email){
-    store.dispatch(userLoginActionSuccess(user.email))
+    store.dispatch(userLoginActionSuccess(user.email));
+    store.dispatch(customersGetListActionInit(user.email));
   }
 }
 fire.auth().onAuthStateChanged(loginCallback);

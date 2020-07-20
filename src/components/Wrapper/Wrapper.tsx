@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Login from '../Login/Login';
+import { RootState } from '../../store/root.reducer';
+import { connect } from 'react-redux';
+import User from '../../models/User';
+import Main from '../Main/Main';
 
-const Wrapper = () => {
+export interface Props{
+    user: User;
+}
+
+const Wrapper = ({ user }: Props) => {
     return (
-        <Login />
+        <Fragment>
+            {!user.isLoggedIn && <Login />}
+            {user.isLoggedIn && <Main />}
+        </Fragment>
     );
 };
 
-export default Wrapper;
+const map = {
+    state: (state: RootState) => {
+        return {
+            user: state.user
+        }
+    }
+}
+
+const connected = connect(map.state);
+
+
+export default connected(Wrapper);

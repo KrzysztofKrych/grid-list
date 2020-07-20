@@ -1,5 +1,5 @@
-import LoginData from "../../../models/LoginData";
-import { fire } from "../../../api/firebaseConfig";
+import LoginData from "../../models/LoginData";
+import { fire } from "../../api/firebaseConfig";
 
 export const login = async (data: LoginData) => {
     return await fire.auth().signInWithEmailAndPassword(data.email, data.password).then(res => 
