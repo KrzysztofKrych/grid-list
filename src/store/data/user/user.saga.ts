@@ -1,11 +1,13 @@
-import UserActionType, { userLoginActionSuccess, UserLoginActionInit } from "./user.actions";
+import UserActionType, { userLoginActionSuccess, UserLoginActionInitModel } from "./user.actions";
 import { call, put, takeLatest } from "redux-saga/effects";
-import { login } from "../../repositories/user/UserRepository";
+import { login } from "../../repositories/UserRepository";
 
-function* requestUser(action: UserLoginActionInit){
+function* requestUser(action: UserLoginActionInitModel){
     try{
         const email = yield call(login, action.payload);
-        yield put(userLoginActionSuccess(email));
+        if(email){
+            yield put(userLoginActionSuccess(email));
+        }
     }catch(error){
         console.log(error);
     }

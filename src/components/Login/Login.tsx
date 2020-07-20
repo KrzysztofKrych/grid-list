@@ -3,7 +3,6 @@ import LoginData from "../../models/LoginData";
 import { Dispatch } from "redux";
 import { userLoginActionInit } from "../../store/data/user/user.actions";
 import { connect } from "react-redux";
-import { RootState } from "../../store/root.reducer";
 
 export interface Props{
     login: (loginData: LoginData) => void;
@@ -30,11 +29,6 @@ const Login = ({login}: Props) => {
 };
 
 const map = {
-    state: (state: RootState) => {
-        return {
-            user: state.user
-        };
-    },
     dispatch: (dispatch: Dispatch) => {
         return {
             login: (loginData: LoginData) => {
@@ -44,6 +38,6 @@ const map = {
     }
 }
 
-const connected = connect(map.state, map.dispatch);
+const connected = connect(undefined, map.dispatch);
 
 export default connected(Login);
