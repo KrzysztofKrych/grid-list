@@ -3,7 +3,7 @@ import Customer from "../../../models/Customer";
 import CustomersActionType, { CustomersGetListActionSuccessModel } from "./customers.actions";
 
 export interface CustomersState {
-    model: Customer[]
+    model: Customer[];
 }
 
 export const initialCustomersState: CustomersState = {
