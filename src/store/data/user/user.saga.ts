@@ -5,7 +5,9 @@ import { login } from "../../repositories/user/UserRepository";
 function* requestUser(action: UserLoginActionInit){
     try{
         const email = yield call(login, action.payload);
-        yield put(userLoginActionSuccess(email));
+        if(email){
+            yield put(userLoginActionSuccess(email));
+        }
     }catch(error){
         console.log(error);
     }

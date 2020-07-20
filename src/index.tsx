@@ -6,12 +6,15 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from "react-redux";
 import store  from "./store/index";
 import { fire } from './api/firebaseConfig';
+import { userLoginActionSuccess } from './store/data/user/user.actions';
 
 const loginCallback = async (user: firebase.User | null) => {
-  console.log(user);
+  if(user && user.email){
+    store.dispatch(userLoginActionSuccess(user.email))
+  }
 }
-
 fire.auth().onAuthStateChanged(loginCallback);
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
