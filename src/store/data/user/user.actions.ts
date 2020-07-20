@@ -3,6 +3,7 @@ import LoginData from "../../../models/LoginData";
 enum UserActionType {
     USER_LOGIN_ACTION_INIT = "USER_LOGIN_ACTION_INIT",
     USER_LOGIN_ACTION_SUCCESS  = "USER_LOGIN_ACTION_SUCCESS",
+    USER_LOGOUT_ACTION_SUCCESS  = "USER_LOGOUT_ACTION_SUCCESS",
 };
 
 export interface UserLoginActionInitModel {
@@ -13,6 +14,10 @@ export interface UserLoginActionInitModel {
 export interface UserLoginActionSuccessModel {
     type: UserActionType.USER_LOGIN_ACTION_SUCCESS
     payload: string
+};
+
+export interface UserLogoutActionSuccessModel {
+    type: UserActionType.USER_LOGOUT_ACTION_SUCCESS
 };
 
 
@@ -29,6 +34,12 @@ export const userLoginActionSuccess = (email: string): UserLoginActionSuccessMod
         payload: email
     };
 };
+
+export const userLogoutActionSuccess = (): UserLogoutActionSuccessModel => {
+    return {
+        type:  UserActionType.USER_LOGOUT_ACTION_SUCCESS,
+    }
+}
 
 export default UserActionType;
 
