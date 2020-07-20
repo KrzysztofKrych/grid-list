@@ -3,8 +3,8 @@ import User from "../../../models/User";
 import UserActionType, { UserLoginActionSuccess } from "./user.actions";
 
 export const initialUserState: User = {
-    login: false,
-    name: ""
+    isLoggedIn: false,
+    email: ""
 };
 
 export type UserAction = UserLoginActionSuccess;
@@ -12,8 +12,11 @@ export type UserAction = UserLoginActionSuccess;
 const userReducer: Redux.Reducer<User, UserAction> = (state = initialUserState, action: UserAction) => {
     switch(action.type){
         case UserActionType.USER_LOGIN_ACTION_SUCCESS:{
-            console.log(action)
-            return state;
+            return {
+                ...state,
+                email: action.payload,
+                isLoggedIn: true
+            };
         }
         default: return state;
     };

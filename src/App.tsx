@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
+import Wrapper from './components/Wrapper/Wrapper';
 
 function App() {
   return (
     <div className="App">
-      init
+      <Wrapper />
     </div>
   );
 }

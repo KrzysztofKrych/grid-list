@@ -1,5 +1,10 @@
 import LoginData from "../../../models/LoginData";
+import { fire } from "../../../api/firebaseConfig";
 
-export const getUser = async (payload: LoginData) => {
-    console.log(payload)
+export const login = async (data: LoginData) => {
+    return await fire.auth().signInWithEmailAndPassword(data.email, data.password).then((res) => {
+        return (res.user && res.user.email) || "";
+    }).catch((e)=>{
+        console.log("error", e)
+    })
 }
