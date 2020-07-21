@@ -1,14 +1,13 @@
+@import '../../globalStyles.css';
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 33%);
-}
-
-.grid > * {
+    grid-template-columns: repeat(auto-fill, 100%);
     padding: .5rem;
+    border-bottom: 1px solid var(--border);
 }
 
-.grid :first-child{
-    grid-column: 1 / -1;
+.grid.header > * {
+    padding: .5rem;
 }
 
 @media(min-width: 672px) {
@@ -17,9 +16,6 @@
 @media(min-width: 950px) {
     .grid {
         grid-template-columns: repeat(auto-fill, 25%);
-    }
-    .grid :first-child{
-        grid-column: 1;
     }
     
 }

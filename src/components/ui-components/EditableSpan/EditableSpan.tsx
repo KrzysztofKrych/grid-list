@@ -17,7 +17,7 @@ const EditableSpan = ({text, onBlur}: Props) => {
     return (
         isEditMode ? 
         <Input autofocus onBlur={handleBlur} defaultValue={text}></Input> : 
-        <span onClick={handleClick}>{text}</span>
+        <div><span onClick={handleClick}>{text}</span></div>
     )
 };
 
