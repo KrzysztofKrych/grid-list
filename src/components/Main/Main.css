@@ -1,0 +1,25 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 33%);
+}
+
+.grid > * {
+    padding: .5rem;
+}
+
+.grid :first-child{
+    grid-column: 1 / -1;
+}
+
+@media(min-width: 672px) {
+}
+
+@media(min-width: 950px) {
+    .grid {
+        grid-template-columns: repeat(auto-fill, 25%);
+    }
+    .grid :first-child{
+        grid-column: 1;
+    }
+    
+}
