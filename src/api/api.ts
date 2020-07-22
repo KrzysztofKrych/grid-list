@@ -20,3 +20,11 @@ export const getByQuery = async (collection: string, query: string, value: strin
         }
     ));
 };
+
+export const deleteDocument = async (collection: string, docId: string) => (
+    await db.collection(collection).doc(docId).delete().then(() => true
+    ).catch((error) => {
+        console.log(error);
+        return false;
+    })
+);
