@@ -1,0 +1,21 @@
+@import '../../globalStyles.css';
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 100%);
+    padding: .5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.grid.header > * {
+    padding: .5rem;
+}
+
+@media(min-width: 672px) {
+    .grid {
+        grid-template-columns: repeat(auto-fill, 25%);
+    }
+}
+
+@media(min-width: 950px) {
+    
+}
