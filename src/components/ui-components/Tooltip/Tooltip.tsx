@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactElement, RefObject, useEffect, useRef, useState } from "react";
+import React, { ReactNode, ReactElement, RefObject, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import "./Tooltip.css";
 
