@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import User from '../../models/User';
 import Main from '../Main/Main';
 import { loginState } from '../../store/data/user/user.reducer';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../ui-components/Spinner/Spinner';
 import styled from 'styled-components';
 
 export interface Props{
