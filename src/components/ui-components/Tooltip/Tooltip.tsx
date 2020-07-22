@@ -24,8 +24,6 @@ const Tooltip = ({children, outerRef, visible, onlyOverflowed}: Props) => {
     useEffect(() => {
         if(outerRef.current && ref.current){
             const target = outerRef.current.getBoundingClientRect();
-            const middle = target.left + (target.width / 2);
-            console.log(target)
             ref.current.style.left = `${target.left}px`;
             ref.current.style.top = `${target.top}px`;
         }
