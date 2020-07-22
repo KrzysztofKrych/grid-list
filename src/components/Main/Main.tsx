@@ -11,6 +11,7 @@ import TooltipContainer from "../ui-components/TooltipContainer/TooltipContainer
 import Button from "../ui-components/Button/Button";
 import { customersDeleteActionInit } from "../../store/data/customers/customers.actions";
 import { Dispatch } from "redux";
+import Header from "../Header/Header";
 
 export interface Props {
     customers: Customer[];
@@ -40,6 +41,7 @@ const Main = ({customers, deleteCustomer}: Props) => {
     };
     return (
         <Fragment>
+            <Header></Header>
             <Grid className="grid">
                 <div>Name</div>
                 <div>Email</div>
