@@ -3,6 +3,8 @@ import Customer from "../../../models/Customer";
 enum CustomersActionType {
     CUSTOMERS_GET_LIST_ACTION_INIT  = "CUSTOMERS_GET_LIST_ACTION_INIT",
     CUSTOMERS_GET_LIST_ACTION_SUCCESS  = "CUSTOMERS_GET_LIST_ACTION_SUCCESS",
+    CUSTOMERS_DELETE_ACTION_INIT  = "CUSTOMERS_DELETE_ACTION_INIT",
+    CUSTOMERS_DELETE_ACTION_SUCCESS  = "CUSTOMERS_DELETE_ACTION_SUCCESS",
 };
     
 export interface CustomersGetListActionInitModel {
@@ -15,19 +17,39 @@ export interface CustomersGetListActionSuccessModel {
     payload: Customer[]
 };
 
+export interface CustomersDeleteModel {
+    type: CustomersActionType.CUSTOMERS_DELETE_ACTION_INIT | CustomersActionType.CUSTOMERS_DELETE_ACTION_SUCCESS
+    payload: string
+};
+
 
 export const customersGetListActionInit = (email: string): CustomersGetListActionInitModel => {
     return {
-        type:  CustomersActionType.CUSTOMERS_GET_LIST_ACTION_INIT,
+        type: CustomersActionType.CUSTOMERS_GET_LIST_ACTION_INIT,
         payload: email
     };
 };
 
 export const customersGetListActionSuccess = (list: Customer[]): CustomersGetListActionSuccessModel => {
     return {
-        type:  CustomersActionType.CUSTOMERS_GET_LIST_ACTION_SUCCESS,
+        type: CustomersActionType.CUSTOMERS_GET_LIST_ACTION_SUCCESS,
         payload: list
     };
 };
+
+export const customersDeleteActionInit = (id: string): CustomersDeleteModel => {
+    return {
+        type: CustomersActionType.CUSTOMERS_DELETE_ACTION_INIT,
+        payload: id
+    };
+};
+
+export const customersDeleteActionSuccess = (id: string): CustomersDeleteModel => {
+    return {
+        type: CustomersActionType.CUSTOMERS_DELETE_ACTION_SUCCESS,
+        payload: id
+    };
+};
+
 
 export default CustomersActionType;

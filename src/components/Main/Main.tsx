@@ -9,18 +9,21 @@ import "./Main.css";
 import EditableSpan from "../ui-components/EditableSpan/EditableSpan";
 import TooltipContainer from "../ui-components/TooltipContainer/TooltipContainer";
 import Button from "../ui-components/Button/Button";
+import { customersDeleteActionInit } from "../../store/data/customers/customers.actions";
+import { Dispatch } from "redux";
 
 export interface Props {
     customers: Customer[];
+    deleteCustomer: (id: string) => void;
 }
 
 
-const Main = ({customers}: Props) => {
+const Main = ({customers, deleteCustomer}: Props) => {
     const handleChangeName = (event: React.FocusEvent<HTMLInputElement>) => {
         console.log(event.target.value);
     };
     const handleDeleteCustomer = (id: string) => {
-        console.log(id);
+        deleteCustomer(id);
     }
     
     const handleDisplayCustomerRow = (customer: Customer, index: number) => {
@@ -55,9 +58,16 @@ const map = {
         return {
             customers: state.customers.model
         };
+    },
+    dispatch: (dispatch: Dispatch) => {
+        return {
+            deleteCustomer: (id: string) => {
+                dispatch(customersDeleteActionInit(id));
+            },
+        };
     }
 };
 
-const connected = connect(map.state);
+const connected = connect(map.state, map.dispatch);
 
 export default connected(Main);
