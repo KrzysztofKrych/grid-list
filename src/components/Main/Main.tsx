@@ -43,7 +43,9 @@ const Main = ({customers, user, deleteCustomer, addCustomer, updateCustomer}: Pr
     };
 
     const handleChangeEmail = (event: React.FocusEvent<HTMLInputElement>, id: string) => {
-        updateCustomer(id, {email: event.target.value});
+        if(validators.isValidEmail(event.target.value)){
+            updateCustomer(id, {email: event.target.value});
+        }
     }
 
     const handleChangePhone = (event: React.FocusEvent<HTMLInputElement>, id: string) => {
