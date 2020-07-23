@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import List from "../List/List";
 import { RootState } from "../../store/root.reducer";
 import { connect } from "react-redux";
@@ -14,6 +14,7 @@ import { Dispatch } from "redux";
 import Header from "../Header/Header";
 import Input from "../ui-components/Input/Input";
 import User from "../../models/User";
+import { filterCustomersByValue } from "../../helper";
 
 export interface Props {
     customers: Customer[];
@@ -23,8 +24,9 @@ export interface Props {
 }
 
 
-const Main = ({customers,user, deleteCustomer, addCustomer}: Props) => {
+const Main = ({customers, user, deleteCustomer, addCustomer}: Props) => {
     const [showAddPanel, setShowAddPanel] = useState<boolean>(false);
+    const [filtredCustomers, setFiltredCustomers] = useState<Customer[]>(customers);
     const [newCustomer, setNewCustomer] = useState<Customer>({
         name: "", email: "", phone: "", id: ""+Date.now(), ownerEmail: user.email
     });
@@ -43,12 +45,16 @@ const Main = ({customers,user, deleteCustomer, addCustomer}: Props) => {
     const handleAddCustomer = () => {
         addCustomer(newCustomer);
         handleToogleAddPanel(false);
-    }
+    };
 
     const handleChangeNewCustomer = (setter: (customer: Customer) => void) => {
         setter(newCustomer);
         setNewCustomer({...newCustomer});
-    }
+    };
+
+    useEffect(() => {
+        setFiltredCustomers(customers);
+    }, [customers]);
     
     const handleDisplayCustomerRow = (customer: Customer, index: number) => {
         return (
@@ -62,10 +68,16 @@ const Main = ({customers,user, deleteCustomer, addCustomer}: Props) => {
             </Grid>
         );
     };
+
+    const handleFilterCustomers = (value: string) => {
+        setFiltredCustomers(filterCustomersByValue(customers, value));
+    };
+
     return (
         <div className="container">
             <Header></Header>
             {!showAddPanel && <div className="add-customer">
+                <Input placeholder="Search..." onChange={event => handleFilterCustomers(event.target.value)} />
                 <Button onClick={() => handleToogleAddPanel(true)}>Add new Customer</Button>
             </div>}
             {showAddPanel && <Grid className="grid add-panel">
@@ -90,7 +102,7 @@ const Main = ({customers,user, deleteCustomer, addCustomer}: Props) => {
                 <div>Actions</div>
             </Grid>
             <List 
-                items={customers} 
+                items={filtredCustomers} 
                 displayData={handleDisplayCustomerRow} />
         </div>
     );

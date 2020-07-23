@@ -1,19 +1,22 @@
 import React from "react";
+import "./Input.css";
 
 export interface Props {
-    onClick?: (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
     type?: string;
     placeholder?: string;
     autofocus?: boolean;
     value?: string | number;
     defaultValue?: string| number;
+    className?: string;
 };
 
-const Input = ({onClick, onBlur, type = "text", placeholder, autofocus = false, value, defaultValue}: Props) => (
+const Input = ({onChange, onBlur, type = "text", placeholder, autofocus = false, value, defaultValue, className}: Props) => (
     <input 
+    className={`${className} input`}
     type={type}
-    onClick={onClick}
+    onChange={onChange}
     onBlur={onBlur}
     placeholder={placeholder}
     autoFocus={autofocus}

@@ -8,6 +8,7 @@
     grid-template-columns: repeat(auto-fill, 100%);
     padding: .5rem;
     border-bottom: 1px solid var(--border);
+    align-items: center;
 }
 
 .grid.header > * {
@@ -22,16 +23,16 @@
 }
 
 .add-customer{
-    align-self: center;
+    display: flex;
+    align-items: center;
     margin: 1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 @media(min-width: 672px) {
     .grid {
         grid-template-columns: repeat(auto-fill, 25%);
-    }
-    .add-customer{
-        align-self: flex-end;
     }
 }
 

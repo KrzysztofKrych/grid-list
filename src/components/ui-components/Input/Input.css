@@ -1,0 +1,6 @@
+@import '../../../globalStyles.css';
+.input{
+    height: 32px;
+    padding: 0 .5rem;
+    border: 1px solid var(--border)
+}
