@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 export interface Props{
     login: (loginData: LoginData) => void;
-}
+};
 
 const Login = ({login}: Props) => {
     const [loginData, setLoginData] = useState<LoginData>({email: "", password: ""});

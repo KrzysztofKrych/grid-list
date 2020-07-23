@@ -4,4 +4,4 @@ export default interface Customer {
     phone: string;
     name: string;
     ownerEmail: string;
-}
+};

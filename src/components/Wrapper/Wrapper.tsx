@@ -10,14 +10,14 @@ import styled from 'styled-components';
 
 export interface Props{
     user: User;
-}
+};
 
 const Wrapper = ({ user }: Props) => {
     const SpinnerContainer = styled.div`
         top: calc(50% - 80px);
         left: calc(50% - 80px);
         position: fixed;
-    `
+    `;
     return (
         <Fragment>
             {user.isLoggedIn === loginState.LOGGEDOUT && <Login />}

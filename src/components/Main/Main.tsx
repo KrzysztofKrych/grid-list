@@ -36,7 +36,6 @@ const Main = ({customers, user, deleteCustomer, addCustomer, updateCustomer}: Pr
         name: "", email: "", phone: "", id: ""+Date.now(), ownerEmail: user.email
     });
 
-
     const handleChangeName = (event: React.FocusEvent<HTMLInputElement>, id: string) => {
         event.target.value && updateCustomer(id, {name: event.target.value});
     };
@@ -44,12 +43,12 @@ const Main = ({customers, user, deleteCustomer, addCustomer, updateCustomer}: Pr
     const handleChangeEmail = (event: React.FocusEvent<HTMLInputElement>, id: string) => {
         if(validators.isValidEmail(event.target.value)){
             updateCustomer(id, {email: event.target.value});
-        }
-    }
+        };
+    };
 
     const handleChangePhone = (event: React.FocusEvent<HTMLInputElement>, id: string) => {
         updateCustomer(id, {phone: event.target.value});
-    }
+    };
 
     const handleDeleteCustomer = (id: string) => {
         deleteCustomer(id);
@@ -64,7 +63,7 @@ const Main = ({customers, user, deleteCustomer, addCustomer, updateCustomer}: Pr
         if(validators.isValidCustomer(newCustomer.name, newCustomer.email)){
             addCustomer(newCustomer);
             handleToogleAddPanel(false);
-        }
+        };
     };
 
     const handleChangeNewCustomer = (setter: (customer: Customer) => void) => {
@@ -77,7 +76,11 @@ const Main = ({customers, user, deleteCustomer, addCustomer, updateCustomer}: Pr
     useEffect(() => {
         setFiltredCustomers(customers);
     }, [customers]);
-    
+
+    const handleFilterCustomers = (value: string) => {
+        setFiltredCustomers(filterCustomersByValue(customers, value));
+    };
+        
     const handleDisplayCustomerRow = (customer: Customer, index: number) => {
         return (
             <Grid key={index} className="grid">
@@ -93,10 +96,6 @@ const Main = ({customers, user, deleteCustomer, addCustomer, updateCustomer}: Pr
                 </div>
             </Grid>
         );
-    };
-
-    const handleFilterCustomers = (value: string) => {
-        setFiltredCustomers(filterCustomersByValue(customers, value));
     };
 
     return (

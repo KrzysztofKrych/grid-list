@@ -29,13 +29,13 @@ const customersReducer: Redux.Reducer<CustomersState, CustomersAction> = (state 
                 ...state,
                 model: [...state.model.filter(customer => customer.id !== action.payload)]
             };
-        }
+        };
         case CustomersActionType.CUSTOMERS_ADD_ACTION_SUCCESS: {
             return {
                 ...state,
                 model: [...state.model, ...[action.payload]]
             };
-        }
+        };
         case CustomersActionType.CUSTOMERS_UPDATE_ACTION_SUCCESS: {
             const { name, email, phone } = action.payload.body;
             const { id } = action.payload;
@@ -53,7 +53,7 @@ const customersReducer: Redux.Reducer<CustomersState, CustomersAction> = (state 
                     return customer;
                 })]
             };
-        }
+        };
         default: return state;
     };
 };

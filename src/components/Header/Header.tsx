@@ -10,7 +10,7 @@ import { userLogoutActionInit } from "../../store/data/user/user.actions";
 export interface Props{
     user: User;
     signout: () => void;
-}
+};
 
 export const StyledHeader = styled.div`
     background: var(--primary);

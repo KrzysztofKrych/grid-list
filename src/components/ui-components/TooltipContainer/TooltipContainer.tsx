@@ -6,7 +6,8 @@ export interface Props {
     children: ReactNode | ReactElement;
     onlyOverflowed?: boolean;
     variant?: string;
-}
+};
+
 const TooltipContainer = ({children, onlyOverflowed, variant}: Props) => {
     const ref = useRef<HTMLDivElement>(null);
     const [visible, setVisible] = useState<boolean>(false);
@@ -20,7 +21,7 @@ const TooltipContainer = ({children, onlyOverflowed, variant}: Props) => {
             {children}
             <Tooltip outerRef={ref} visible={visible} onlyOverflowed={onlyOverflowed}>{children}</Tooltip>
         </div>
-    )
-}
+    );
+};
 
 export default TooltipContainer;

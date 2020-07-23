@@ -18,7 +18,7 @@ const Tooltip = ({children, outerRef, visible, onlyOverflowed}: Props) => {
             return isOverflowed && visible ? 'visible' : '';
         }
         return visible ? 'visible' : '';
-    }
+    };
 
     useEffect(() => {
         if(outerRef.current && ref.current){

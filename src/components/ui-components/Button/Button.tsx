@@ -8,7 +8,7 @@ export interface Props {
     variant?: string;
     className?: string;
     disabled?: boolean;
-}
+};
 
 const Button = ({onClick, children, style, variant = "", className = "", disabled}: Props) => (
     <button 

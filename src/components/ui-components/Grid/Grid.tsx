@@ -5,7 +5,7 @@ export interface Props {
     className?: string;
     style?: CSSProperties;
     as?: string;
-}
+};
 
 const Grid = ({children, className, style, as = "div"}: Props) => (
     React.createElement(
