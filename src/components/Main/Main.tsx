@@ -38,8 +38,7 @@ const Main = ({customers, user, deleteCustomer, addCustomer, updateCustomer}: Pr
 
 
     const handleChangeName = (event: React.FocusEvent<HTMLInputElement>, id: string) => {
-        updateCustomer(id, {name: event.target.value});
-        console.log(event.target.value);
+        event.target.value && updateCustomer(id, {name: event.target.value});
     };
 
     const handleChangeEmail = (event: React.FocusEvent<HTMLInputElement>, id: string) => {
@@ -84,7 +83,11 @@ const Main = ({customers, user, deleteCustomer, addCustomer, updateCustomer}: Pr
             <Grid key={index} className="grid">
                 <EditableSpan onBlur={event => handleChangeName(event, customer.id)} text={customer.name}/>
                 <EditableSpan onBlur={event => handleChangeEmail(event, customer.id)} text={customer.email}></EditableSpan>
-                <EditableSpan onBlur={event => handleChangePhone(event, customer.id)} text={customer.phone}></EditableSpan>
+                <EditableSpan 
+                onBlur={event => handleChangePhone(event, customer.id)} 
+                text={customer.phone || "Click to add phone"}
+                variant={!customer.phone ? 'danger':''}
+                disableDefaultText={!customer.phone}></EditableSpan>
                 <div>
                     <Button variant="danger" onClick={() => handleDeleteCustomer(customer.id)}>Delete</Button>
                 </div>

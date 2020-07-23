@@ -5,7 +5,7 @@
     border: 1px solid var(--border)
 }
 
-.danger, .danger:focus, .danger:active {
+input.danger, input.danger:focus, input.danger:active {
     border: 1px solid var(--danger);
 }
 

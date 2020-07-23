@@ -47,7 +47,7 @@ const customersReducer: Redux.Reducer<CustomersState, CustomersAction> = (state 
                             ...customer,
                             name: name ? name : customer.name,
                             email: email ? email : customer.email,
-                            phone: phone ? phone : customer.phone,
+                            phone: phone !== undefined ? phone : customer.phone,
                         };
                     };
                     return customer;
