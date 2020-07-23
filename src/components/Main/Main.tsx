@@ -98,7 +98,7 @@ const Main = ({customers, user, deleteCustomer, addCustomer}: Props) => {
                         handleChangeNewCustomer(customer => customer.name = event.target.value);
                         setErrors({
                             ...errors,
-                            name: !event.target.value,
+                            name: !event.target.value
                         });
                     }}/>
                 <Input 
@@ -109,8 +109,8 @@ const Main = ({customers, user, deleteCustomer, addCustomer}: Props) => {
                         handleChangeNewCustomer(customer => customer.email = event.target.value);
                         setErrors({
                             ...errors,
-                            email: !validators.isValidEmail(event.target.value),
-                        })
+                            email: !validators.isValidEmail(event.target.value)
+                        });
                     }}  />
                 <Input 
                     placeholder="Type phone..."
