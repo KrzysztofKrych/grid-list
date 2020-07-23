@@ -5,6 +5,10 @@
     border: 1px solid var(--border)
 }
 
+.danger, .danger:focus, .danger:active {
+    border: 1px solid var(--danger);
+}
+
 .large{
     min-width: 200px;
 }

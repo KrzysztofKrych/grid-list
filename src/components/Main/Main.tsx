@@ -14,7 +14,7 @@ import { Dispatch } from "redux";
 import Header from "../Header/Header";
 import Input from "../ui-components/Input/Input";
 import User from "../../models/User";
-import { filterCustomersByValue } from "../../helper";
+import { filterCustomersByValue, validators } from "../../helper";
 
 export interface Props {
     customers: Customer[];
@@ -23,10 +23,14 @@ export interface Props {
     addCustomer: (customer: Customer) => void;
 }
 
+const initialValidationErrors = {name: false, email: false};
 
 const Main = ({customers, user, deleteCustomer, addCustomer}: Props) => {
     const [showAddPanel, setShowAddPanel] = useState<boolean>(false);
     const [filtredCustomers, setFiltredCustomers] = useState<Customer[]>(customers);
+    const [validCustomer, setValidCustomer] = useState<boolean>(false);
+    const [errors, setErrors] = useState({...initialValidationErrors});
+
     const [newCustomer, setNewCustomer] = useState<Customer>({
         name: "", email: "", phone: "", id: ""+Date.now(), ownerEmail: user.email
     });
@@ -39,17 +43,22 @@ const Main = ({customers, user, deleteCustomer, addCustomer}: Props) => {
     };
 
     const handleToogleAddPanel = (value: boolean) => {
-        setShowAddPanel(value)
+        setShowAddPanel(value);
+        setErrors({...initialValidationErrors});
     };
 
     const handleAddCustomer = () => {
-        addCustomer(newCustomer);
-        handleToogleAddPanel(false);
+        if(validators.isValidCustomer(newCustomer.name, newCustomer.email)){
+            addCustomer(newCustomer);
+            handleToogleAddPanel(false);
+        }
     };
 
     const handleChangeNewCustomer = (setter: (customer: Customer) => void) => {
         setter(newCustomer);
         setNewCustomer({...newCustomer});
+        const { name, email } = newCustomer;
+        setValidCustomer(validators.isValidCustomer(name, email));
     };
 
     useEffect(() => {
@@ -77,21 +86,40 @@ const Main = ({customers, user, deleteCustomer, addCustomer}: Props) => {
         <div className="container">
             <Header></Header>
             {!showAddPanel && <div className="add-customer">
-                <Input variant="large" placeholder="Enter name, email or phone" onChange={event => handleFilterCustomers(event.target.value)} />
+                <Input size="large" placeholder="Enter name, email or phone" onChange={event => handleFilterCustomers(event.target.value)} />
                 <Button onClick={() => handleToogleAddPanel(true)}>Add new Customer</Button>
             </div>}
             {showAddPanel && <Grid className="grid add-panel">
                 <Input 
+                    onFocus={() => setErrors({...errors, name: false})}
+                    variant={errors.name ? 'danger' : ''}
                     placeholder="Type name..." 
-                    onBlur={event => handleChangeNewCustomer(customer => customer.name = event.target.value)}/>
+                    onBlur={event => {
+                        handleChangeNewCustomer(customer => customer.name = event.target.value);
+                        setErrors({
+                            ...errors,
+                            name: !event.target.value,
+                        });
+                    }}/>
                 <Input 
+                    onFocus={() => setErrors({...errors, email: false})}
+                    variant={errors.email ? 'danger' : ''}
                     placeholder="Type email..."
-                    onBlur={event => handleChangeNewCustomer(customer => customer.email = event.target.value)}  />
+                    onBlur={event => {
+                        handleChangeNewCustomer(customer => customer.email = event.target.value);
+                        setErrors({
+                            ...errors,
+                            email: !validators.isValidEmail(event.target.value),
+                        })
+                    }}  />
                 <Input 
                     placeholder="Type phone..."
                     onBlur={event => handleChangeNewCustomer(customer => customer.phone = event.target.value)} />
                 <div className="actions">
-                    <Button variant="info" onClick={() => handleAddCustomer()}>Save</Button>
+                    <Button
+                        disabled={!validCustomer}
+                        variant="info" 
+                        onClick={() => handleAddCustomer()}>Save</Button>
                     <Button variant="danger" onClick={() => handleToogleAddPanel(false)}>Cancel</Button>
                 </div>
             </Grid>}
