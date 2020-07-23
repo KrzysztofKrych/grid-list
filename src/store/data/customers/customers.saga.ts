@@ -28,7 +28,7 @@ function* addCustomer(action: CustomersAddModel){
     try{
         const id = yield call(requestAddCustomer, action.payload);
         if(id){
-            yield put(customersAddActionSuccess(action.payload));
+            yield put(customersAddActionSuccess({...action.payload, id}));
         }
     }catch(error){
         console.log(error);
