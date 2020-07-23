@@ -9,7 +9,6 @@ export interface Props {
     onlyOverflowed?: boolean;
 }
 
-
 const Tooltip = ({children, outerRef, visible, onlyOverflowed}: Props) => {
     const ref = useRef<HTMLDivElement>(null);
 
