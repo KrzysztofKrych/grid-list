@@ -35,4 +35,13 @@ export const addDocument = async <T> (colletion: string, addValue: T) => (
         console.log(error);
         return "";
     })
-)
+);
+
+export const updateDocument = async <T> (colletion: string, id: string, body: T) => (
+    await db.collection(colletion).doc(id).update(body).then(response => {
+        return true;
+    }).catch(error => {
+        console.log(error);
+        return false;
+    })
+);

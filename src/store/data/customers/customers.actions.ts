@@ -1,4 +1,5 @@
 import Customer from "../../../models/Customer";
+import UpdateConsumerBody from "../../../models/UpdateCustomerBody";
 
 enum CustomersActionType {
     CUSTOMERS_GET_LIST_ACTION_INIT  = "CUSTOMERS_GET_LIST_ACTION_INIT",
@@ -6,7 +7,9 @@ enum CustomersActionType {
     CUSTOMERS_DELETE_ACTION_INIT  = "CUSTOMERS_DELETE_ACTION_INIT",
     CUSTOMERS_DELETE_ACTION_SUCCESS  = "CUSTOMERS_DELETE_ACTION_SUCCESS",
     CUSTOMERS_ADD_ACTION_INIT = "CUSTOMERS_ADD_ACTION_INIT",
-    CUSTOMERS_ADD_ACTION_SUCCESS = "CUSTOMERS_ADD_ACTION_SUCCESS"
+    CUSTOMERS_ADD_ACTION_SUCCESS = "CUSTOMERS_ADD_ACTION_SUCCESS",
+    CUSTOMERS_UPDATE_ACTION_INIT = "CUSTOMERS_UPDATE_ACTION_INIT",
+    CUSTOMERS_UPDATE_ACTION_SUCCESS = "CUSTOMERS_UPDATE_ACTION_SUCCESS"
 };
     
 export interface CustomersGetListActionInitModel {
@@ -29,6 +32,10 @@ export interface CustomersAddModel {
     payload: Customer
 };
 
+export interface CustomersUpdateModel {
+    type: CustomersActionType.CUSTOMERS_UPDATE_ACTION_INIT | CustomersActionType.CUSTOMERS_UPDATE_ACTION_SUCCESS
+    payload: {id: string, body: UpdateConsumerBody}
+};
 
 export const customersGetListActionInit = (email: string): CustomersGetListActionInitModel => {
     return {
@@ -69,6 +76,20 @@ export const customersAddActionSuccess = (customer: Customer): CustomersAddModel
     return {
         type: CustomersActionType.CUSTOMERS_ADD_ACTION_SUCCESS,
         payload: customer
+    };
+};
+
+export const customersUpdateActionInit = (id: string, body: UpdateConsumerBody): CustomersUpdateModel => {
+    return {
+        type: CustomersActionType.CUSTOMERS_UPDATE_ACTION_INIT,
+        payload: { id, body }
+    };
+};
+
+export const customersUpdateActionSuccess = (id: string, body: UpdateConsumerBody): CustomersUpdateModel => {
+    return {
+        type: CustomersActionType.CUSTOMERS_UPDATE_ACTION_SUCCESS,
+        payload: { id, body }
     };
 };
 
