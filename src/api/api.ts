@@ -28,3 +28,11 @@ export const deleteDocument = async (collection: string, docId: string) => (
         return false;
     })
 );
+
+export const addDocument = async <T> (colletion: string, addValue: T) => (
+    await db.collection(colletion).add(addValue).then(docRef => docRef.id)
+    .catch((error) => {
+        console.log(error);
+        return "";
+    })
+)
