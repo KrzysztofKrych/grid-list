@@ -16,7 +16,7 @@
 }
 
 .add-panel{
-    margin: 1rem;
+    padding: 1rem;
 }
 .add-panel input{
     margin: 0 .5rem;
@@ -26,16 +26,32 @@
     display: flex;
     align-items: center;
     margin: 1rem;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
+}
+
+.actions{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+.actions > * {
+    margin: 0 .5rem;
 }
 
 @media(min-width: 672px) {
     .grid {
         grid-template-columns: repeat(auto-fill, 25%);
     }
+    .actions{
+        justify-content: flex-end;
+        margin-top: 0;
+    }
 }
 
-@media(min-width: 950px) {
-    
+@media(min-width: 476px) {
+    .add-customer{
+        justify-content: space-between;
+    }
 }

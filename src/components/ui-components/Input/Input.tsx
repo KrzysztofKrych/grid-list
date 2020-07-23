@@ -10,11 +10,12 @@ export interface Props {
     value?: string | number;
     defaultValue?: string| number;
     className?: string;
+    variant?: string;
 };
 
-const Input = ({onChange, onBlur, type = "text", placeholder, autofocus = false, value, defaultValue, className}: Props) => (
+const Input = ({onChange, onBlur, type = "text", placeholder, autofocus = false, value, defaultValue, className, variant}: Props) => (
     <input 
-    className={`${className} input`}
+    className={`${className} ${variant} input`}
     type={type}
     onChange={onChange}
     onBlur={onBlur}

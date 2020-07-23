@@ -25,7 +25,7 @@ const Tooltip = ({children, outerRef, visible, onlyOverflowed}: Props) => {
         if(outerRef.current && ref.current){
             const target = outerRef.current.getBoundingClientRect();
             ref.current.style.left = `${target.left}px`;
-            ref.current.style.top = `${target.top}px`;
+            ref.current.style.top = `${target.top + window.scrollY}px`;
         }
     }, [outerRef, visible]);
     

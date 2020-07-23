@@ -61,7 +61,7 @@ const Main = ({customers, user, deleteCustomer, addCustomer}: Props) => {
             <Grid key={index} className="grid">
                 <EditableSpan onBlur={handleChangeName} text={customer.name}/>
                 <TooltipContainer onlyOverflowed>{customer.email}</TooltipContainer>
-                <div>{customer.phone}</div>
+                <TooltipContainer onlyOverflowed>{customer.phone}</TooltipContainer>
                 <div>
                     <Button variant="danger" onClick={() => handleDeleteCustomer(customer.id)}>Delete</Button>
                 </div>
@@ -77,11 +77,11 @@ const Main = ({customers, user, deleteCustomer, addCustomer}: Props) => {
         <div className="container">
             <Header></Header>
             {!showAddPanel && <div className="add-customer">
-                <Input placeholder="Search..." onChange={event => handleFilterCustomers(event.target.value)} />
+                <Input variant="large" placeholder="Enter name, email or phone" onChange={event => handleFilterCustomers(event.target.value)} />
                 <Button onClick={() => handleToogleAddPanel(true)}>Add new Customer</Button>
             </div>}
             {showAddPanel && <Grid className="grid add-panel">
-                    <Input 
+                <Input 
                     placeholder="Type name..." 
                     onBlur={event => handleChangeNewCustomer(customer => customer.name = event.target.value)}/>
                 <Input 
@@ -90,7 +90,7 @@ const Main = ({customers, user, deleteCustomer, addCustomer}: Props) => {
                 <Input 
                     placeholder="Type phone..."
                     onBlur={event => handleChangeNewCustomer(customer => customer.phone = event.target.value)} />
-                <div>
+                <div className="actions">
                     <Button variant="info" onClick={() => handleAddCustomer()}>Save</Button>
                     <Button variant="danger" onClick={() => handleToogleAddPanel(false)}>Cancel</Button>
                 </div>
