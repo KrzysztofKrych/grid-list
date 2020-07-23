@@ -3,4 +3,5 @@ export default interface Customer {
     id: string;
     phone: string;
     name: string;
+    ownerEmail: string;
 }
