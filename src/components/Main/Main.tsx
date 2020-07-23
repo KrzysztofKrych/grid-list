@@ -4,28 +4,29 @@ import { RootState } from "../../store/root.reducer";
 import { connect } from "react-redux";
 import Customer from "../../models/Customer";
 import Grid from "../ui-components/Grid/Grid";
-
-import "./Main.css";
 import EditableSpan from "../ui-components/EditableSpan/EditableSpan";
-import TooltipContainer from "../ui-components/TooltipContainer/TooltipContainer";
 import Button from "../ui-components/Button/Button";
-import { customersDeleteActionInit, customersAddActionInit } from "../../store/data/customers/customers.actions";
+import { customersDeleteActionInit, customersAddActionInit, customersUpdateActionInit } from "../../store/data/customers/customers.actions";
 import { Dispatch } from "redux";
 import Header from "../Header/Header";
 import Input from "../ui-components/Input/Input";
 import User from "../../models/User";
 import { filterCustomersByValue, validators } from "../../helper";
+import "./Main.css";
+import UpdateConsumer from "../../models/UpdateCustomerBody";
+import UpdateConsumerBody from "../../models/UpdateCustomerBody";
 
 export interface Props {
     customers: Customer[];
     user: User;
     deleteCustomer: (id: string) => void;
     addCustomer: (customer: Customer) => void;
-}
+    updateCustomer: (id: string, body: UpdateConsumerBody) => void;
+};
 
 const initialValidationErrors = {name: false, email: false};
 
-const Main = ({customers, user, deleteCustomer, addCustomer}: Props) => {
+const Main = ({customers, user, deleteCustomer, addCustomer, updateCustomer}: Props) => {
     const [showAddPanel, setShowAddPanel] = useState<boolean>(false);
     const [filtredCustomers, setFiltredCustomers] = useState<Customer[]>(customers);
     const [validCustomer, setValidCustomer] = useState<boolean>(false);
@@ -34,9 +35,20 @@ const Main = ({customers, user, deleteCustomer, addCustomer}: Props) => {
     const [newCustomer, setNewCustomer] = useState<Customer>({
         name: "", email: "", phone: "", id: ""+Date.now(), ownerEmail: user.email
     });
-    const handleChangeName = (event: React.FocusEvent<HTMLInputElement>) => {
+
+
+    const handleChangeName = (event: React.FocusEvent<HTMLInputElement>, id: string) => {
+        updateCustomer(id, {name: event.target.value});
         console.log(event.target.value);
     };
+
+    const handleChangeEmail = (event: React.FocusEvent<HTMLInputElement>, id: string) => {
+        updateCustomer(id, {email: event.target.value});
+    }
+
+    const handleChangePhone = (event: React.FocusEvent<HTMLInputElement>, id: string) => {
+        updateCustomer(id, {phone: event.target.value});
+    }
 
     const handleDeleteCustomer = (id: string) => {
         deleteCustomer(id);
@@ -68,9 +80,9 @@ const Main = ({customers, user, deleteCustomer, addCustomer}: Props) => {
     const handleDisplayCustomerRow = (customer: Customer, index: number) => {
         return (
             <Grid key={index} className="grid">
-                <EditableSpan onBlur={handleChangeName} text={customer.name}/>
-                <TooltipContainer onlyOverflowed>{customer.email}</TooltipContainer>
-                <TooltipContainer onlyOverflowed>{customer.phone}</TooltipContainer>
+                <EditableSpan onBlur={event => handleChangeName(event, customer.id)} text={customer.name}/>
+                <EditableSpan onBlur={event => handleChangeEmail(event, customer.id)} text={customer.email}></EditableSpan>
+                <EditableSpan onBlur={event => handleChangePhone(event, customer.id)} text={customer.phone}></EditableSpan>
                 <div>
                     <Button variant="danger" onClick={() => handleDeleteCustomer(customer.id)}>Delete</Button>
                 </div>
@@ -150,7 +162,10 @@ const map = {
             },
             addCustomer: (customer: Customer) => {
                 dispatch(customersAddActionInit(customer));
-            }
+            },
+            updateCustomer: (id: string, body: UpdateConsumerBody) => {
+                dispatch(customersUpdateActionInit(id, body));
+            },
         };
     }
 };

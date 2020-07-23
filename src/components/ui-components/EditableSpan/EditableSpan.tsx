@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Input from "../Input/Input";
+import TooltipContainer from "../TooltipContainer/TooltipContainer";
 
 export interface Props {
     text: string;
@@ -17,7 +18,7 @@ const EditableSpan = ({text, onBlur}: Props) => {
     return (
         isEditMode ? 
         <Input autofocus onBlur={handleBlur} defaultValue={text}></Input> : 
-        <div><span onClick={handleClick}>{text}</span></div>
+        <TooltipContainer onlyOverflowed><span onClick={handleClick}>{text}</span></TooltipContainer>
     )
 };
 
