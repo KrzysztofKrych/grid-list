@@ -1,6 +1,6 @@
-import UserActionType, { userLoginActionSuccess, UserLoginActionInitModel } from "./user.actions";
+import UserActionType, { userLoginActionSuccess, UserLoginActionInitModel, userLogoutActionSuccess } from "./user.actions";
 import { call, put, takeLatest } from "redux-saga/effects";
-import { login } from "../../repositories/UserRepository";
+import { login, signout } from "../../repositories/UserRepository";
 import { customersGetListActionInit } from "../customers/customers.actions";
 
 function* requestUser(action: UserLoginActionInitModel){
@@ -15,6 +15,17 @@ function* requestUser(action: UserLoginActionInitModel){
     }
 }
 
+function* logoutUser(){
+    try{
+        yield call(signout);
+        yield put(userLogoutActionSuccess());
+    }catch(error){
+        console.log(error);
+    }
+}
+
+
 export default function* userSaga() {
     yield takeLatest(UserActionType.USER_LOGIN_ACTION_INIT, requestUser);
+    yield takeLatest(UserActionType.USER_LOGOUT_ACTION_INIT, logoutUser);
 }

@@ -1,6 +1,6 @@
 import Redux from "redux";
 import User from "../../../models/User";
-import UserActionType, { UserLoginActionSuccessModel, UserLoginActionInitModel, UserLogoutActionSuccessModel } from "./user.actions";
+import UserActionType, { UserLoginActionSuccessModel, UserLoginActionInitModel, UserLogoutActionModel } from "./user.actions";
 
 export enum loginState {
     LOGGEDIN = "LOGGEDIN",
@@ -16,7 +16,7 @@ export const initialUserState: User = {
 export type UserAction = |
 UserLoginActionInitModel | 
 UserLoginActionSuccessModel |
-UserLogoutActionSuccessModel;
+UserLogoutActionModel;
 
 const userReducer: Redux.Reducer<User, UserAction> = (state = initialUserState, action: UserAction) => {
     switch(action.type){
