@@ -1,4 +1,8 @@
 @import '../../globalStyles.css';
+.container{
+    display: flex;
+    flex-direction: column;
+}
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 100%);
@@ -10,9 +14,24 @@
     padding: .5rem;
 }
 
+.add-panel{
+    margin: 1rem;
+}
+.add-panel input{
+    margin: 0 .5rem;
+}
+
+.add-customer{
+    align-self: center;
+    margin: 1rem;
+}
+
 @media(min-width: 672px) {
     .grid {
         grid-template-columns: repeat(auto-fill, 25%);
+    }
+    .add-customer{
+        align-self: flex-end;
     }
 }
 

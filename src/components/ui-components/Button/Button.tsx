@@ -1,16 +1,18 @@
 import React, { ReactNode, ReactElement, CSSProperties } from "react";
+import "./Button.css";
 
 export interface Props {
     onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     children: ReactNode | ReactElement;
     style?: CSSProperties;
-    primary?: boolean;
+    variant?: string;
     className?: string;
+    disabled?: boolean;
 }
 
-const Button = ({onClick, children, style, primary, className}: Props) => (
+const Button = ({onClick, children, style, variant = "", className = "", disabled}: Props) => (
     <button 
-        className={`${className} ${primary?'prmiary':''}`}
+        className={`button ${className} ${variant} ${disabled?'disabled':''}`}
         onClick={onClick} style={style}>{children}</button>
 );
 

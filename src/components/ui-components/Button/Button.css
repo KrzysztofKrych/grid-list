@@ -1,0 +1,35 @@
+@import '../../../globalStyles.css';
+.button{
+    color: var(--txt-white);
+    background-color: var(--success);
+    outline: none;
+    border-radius: 2px;
+    border: 1px solid var(--success);
+    padding: .5rem .75rem;
+    cursor: pointer;
+    transition: .5s;
+}
+.button:hover{
+    background-color: var(--success-hover);
+}
+.button.danger{
+    background-color: var(--danger);
+    border: 1px solid var(--danger);
+}
+.button.danger:hover{
+    background-color: var(--danger-hover);
+}
+.button.info{
+    background-color: var(--info);
+    border: 1px solid var(--info);
+}
+
+.button.disabled{
+    pointer-events: none;
+    opacity: .5;
+}
+
+.button.disabled{
+    opacity: .5;
+    pointer-events: none;
+}

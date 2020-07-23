@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import List from "../List/List";
 import { RootState } from "../../store/root.reducer";
 import { connect } from "react-redux";
@@ -12,6 +12,7 @@ import Button from "../ui-components/Button/Button";
 import { customersDeleteActionInit } from "../../store/data/customers/customers.actions";
 import { Dispatch } from "redux";
 import Header from "../Header/Header";
+import Input from "../ui-components/Input/Input";
 
 export interface Props {
     customers: Customer[];
@@ -20,11 +21,16 @@ export interface Props {
 
 
 const Main = ({customers, deleteCustomer}: Props) => {
+    const [showAddPanel, setShowAddPanel] = useState<boolean>(false);
     const handleChangeName = (event: React.FocusEvent<HTMLInputElement>) => {
         console.log(event.target.value);
     };
     const handleDeleteCustomer = (id: string) => {
         deleteCustomer(id);
+    }
+
+    const handleToogleAddPanel = (value: boolean) => {
+        setShowAddPanel(value)
     }
     
     const handleDisplayCustomerRow = (customer: Customer, index: number) => {
@@ -34,14 +40,26 @@ const Main = ({customers, deleteCustomer}: Props) => {
                 <TooltipContainer onlyOverflowed>{customer.email}</TooltipContainer>
                 <div>{customer.phone}</div>
                 <div>
-                    <Button onClick={() => handleDeleteCustomer(customer.id)}>Delete</Button>
+                    <Button variant="danger" onClick={() => handleDeleteCustomer(customer.id)}>Delete</Button>
                 </div>
             </Grid>
         );
     };
     return (
-        <Fragment>
+        <div className="container">
             <Header></Header>
+            {!showAddPanel && <div className="add-customer">
+                <Button onClick={() => handleToogleAddPanel(true)}>Add new Customer</Button>
+            </div>}
+            {showAddPanel && <Grid className="grid add-panel">
+                <Input placeholder="Type name..." />
+                <Input placeholder="Type email..."  />
+                <Input placeholder="Type phone..."  />
+                <div>
+                    <Button variant="info" onClick={() => undefined}>Save</Button>
+                    <Button variant="danger" onClick={() => handleToogleAddPanel(false)}>Cancel</Button>
+                </div>
+            </Grid>}
             <Grid className="grid">
                 <div>Name</div>
                 <div>Email</div>
@@ -51,7 +69,7 @@ const Main = ({customers, deleteCustomer}: Props) => {
             <List 
                 items={customers} 
                 displayData={handleDisplayCustomerRow} />
-        </Fragment>
+        </div>
     );
 };
 
