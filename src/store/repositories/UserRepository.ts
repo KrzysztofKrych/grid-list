@@ -13,6 +13,5 @@ export const signout = async () => {
     await fire.auth().signOut()
     .catch(error => {
         console.log(error);
-        return error;
     })
-}
+};

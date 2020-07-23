@@ -1,0 +1,4 @@
+@import '../../../globalStyles.css';
+.tooltip-container.danger {
+    color: var(--danger);
+}
