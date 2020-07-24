@@ -1,4 +1,4 @@
-import UserActionType, { userLoginActionSuccess, UserLoginActionInitModel, userLogoutActionSuccess, UserRegisterActionModel, userRegisterActionSuccess, userLoginActionError } from "./user.actions";
+import UserActionType, { userLoginActionSuccess, UserLoginActionInitModel, userLogoutActionSuccess, UserRegisterActionModel, userRegisterActionSuccess, userLoginActionError, userRegisterActionError } from "./user.actions";
 import { call, put, takeLatest } from "redux-saga/effects";
 import { login, signout, register } from "../../repositories/UserRepository";
 import { customersGetListActionInit } from "../customers/customers.actions";
@@ -28,9 +28,12 @@ function* logoutUser(){
 
 function* registerUser(action: UserRegisterActionModel){
     try{
-       const response =  yield call(register, action.payload);
-        if(response){
+       const {user, error} =  yield call(register, action.payload);
+        if(user){
             yield put(userRegisterActionSuccess(action.payload));
+        }
+        if(error){
+            yield put(userRegisterActionError(error))
         }
     }catch(error){
         console.log(error);

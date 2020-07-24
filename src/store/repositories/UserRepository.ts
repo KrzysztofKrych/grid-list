@@ -18,9 +18,9 @@ export const signout = async () => {
 };
 
 export const register = async ({email, password}: LoginData) => (
-    fire.auth().createUserWithEmailAndPassword(email, password).then(res => true)
+    fire.auth().createUserWithEmailAndPassword(email, password).then(res => ({user: true}))
     .catch(error => {
         console.log(error);
-        return false;
+        return {error: error.message};
     })
 );

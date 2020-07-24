@@ -8,7 +8,9 @@ enum UserActionType {
     USER_REGISTER_ACTION_INIT = "USER_REGISTER_ACTION_INIT",
     USER_REGISTER_ACTION_SUCCESS = "USER_REGISTER_ACTION_SUCCESS",
     USER_LOGIN_ACTION_ERROR = "USER_LOGIN_ACTION_ERROR",
-    USER_DELETE_ERROR_MESSAGE_ACTION = "USER_DELETE_ERROR_MESSAGE_ACTION"
+    USER_REGISTER_ACTION_ERROR = "USER_REGISTER_ACTION_ERROR",
+    USER_DELETE_LOGIN_ERROR_MESSAGE_ACTION = "USER_DELETE_LOGIN_ERROR_MESSAGE_ACTION",
+    USER_DELETE_REGISTER_ERROR_MESSAGE_ACTION = "USER_DELETE_REGISTER_ERROR_MESSAGE_ACTION"
 };
 
 export interface UserLoginActionInitModel {
@@ -25,6 +27,12 @@ export interface UserLoginActionErrorModel {
     type: UserActionType.USER_LOGIN_ACTION_ERROR;
     payload: string
 };
+
+export interface UserRegisterActionErrorModel {
+    type: UserActionType.USER_REGISTER_ACTION_ERROR;
+    payload: string
+};
+
 export interface UserLogoutActionModel {
     type: UserActionType.USER_LOGOUT_ACTION_INIT | UserActionType.USER_LOGOUT_ACTION_SUCCESS
 };
@@ -33,8 +41,13 @@ export interface UserRegisterActionModel {
     type: UserActionType.USER_REGISTER_ACTION_INIT | UserActionType.USER_REGISTER_ACTION_SUCCESS
     payload: LoginData
 };
-export interface UserDeleteErrorMessageActionModel {
-    type: UserActionType.USER_DELETE_ERROR_MESSAGE_ACTION
+
+export interface UserDeleteLoginErrorMessageActionModel {
+    type: UserActionType.USER_DELETE_LOGIN_ERROR_MESSAGE_ACTION
+}
+
+export interface UserDeleteRegisterErrorMessageActionModel {
+    type: UserActionType.USER_DELETE_REGISTER_ERROR_MESSAGE_ACTION
 }
 
 
@@ -57,6 +70,13 @@ export const userLoginActionSuccess = (email: string): UserLoginActionSuccessMod
 export const userLoginActionError = (error: string): UserLoginActionErrorModel => {
     return {
         type:  UserActionType.USER_LOGIN_ACTION_ERROR,
+        payload: error
+    };
+};
+
+export const userRegisterActionError = (error: string): UserRegisterActionErrorModel => {
+    return {
+        type:  UserActionType.USER_REGISTER_ACTION_ERROR,
         payload: error
     };
 };
@@ -87,9 +107,15 @@ export const userRegisterActionSuccess = (data: LoginData): UserRegisterActionMo
     };
 };
 
-export const userDeleteErrorMessageAction = (): UserDeleteErrorMessageActionModel => {
+export const userDeleteLoginErrorMessageAction = (): UserDeleteLoginErrorMessageActionModel => {
     return {
-        type: UserActionType.USER_DELETE_ERROR_MESSAGE_ACTION,
+        type: UserActionType.USER_DELETE_LOGIN_ERROR_MESSAGE_ACTION,
+    };
+};
+
+export const userDeleteRegisterErrorMessageAction = (): UserDeleteRegisterErrorMessageActionModel => {
+    return {
+        type: UserActionType.USER_DELETE_REGISTER_ERROR_MESSAGE_ACTION,
     };
 };
 
