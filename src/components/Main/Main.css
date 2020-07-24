@@ -31,6 +31,10 @@
     cursor: pointer;
 }
 
+.phone-small{
+    max-width: 100px;
+}
+
 .add-panel{
     padding: 1rem;
 }
@@ -83,6 +87,9 @@
     }
     .add-customer button{
         margin-top: 0
+    }
+    .phone-small{
+        max-width: 100%
     }
 }
 
