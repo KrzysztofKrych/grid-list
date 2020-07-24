@@ -19,11 +19,15 @@
 .button.danger:hover{
     background-color: var(--danger-hover);
 }
+
 .button.info{
     background-color: var(--info);
     border: 1px solid var(--info);
 }
-
+.button.info:hover{
+    background-color: var(--info-hover);
+    border: 1px solid var(--info-hover);
+}
 .button.disabled{
     pointer-events: none;
     opacity: .5;
