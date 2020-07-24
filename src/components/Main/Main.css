@@ -10,9 +10,8 @@
     border-bottom: 1px solid var(--border);
     align-items: center;
 }
-
-.grid.header > * {
-    padding: .5rem;
+.grid.table-head > *{
+    cursor: pointer;
 }
 
 .add-panel{
