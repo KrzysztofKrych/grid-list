@@ -14,6 +14,7 @@ import { filterCustomersByValue, validators, sortByStringValue } from "../../hel
 import "./Main.css";
 import UpdateConsumerBody from "../../models/UpdateCustomerBody";
 import { UserState } from "../../store/data/user/user.reducer";
+import styled from "styled-components";
 
 export interface Props {
     customers: Customer[];
@@ -22,6 +23,15 @@ export interface Props {
     addCustomer: (customer: Customer) => void;
     updateCustomer: (id: string, body: UpdateConsumerBody) => void;
 };
+
+const OnlyPhoneDiv = styled.div`
+    display: block;
+    min-width: 50%;
+    text-align: left;
+    @media(min-width: 672px) {
+        display: none;
+    }
+`
 
 const initialValidationErrors = {name: false, email: false};
 
@@ -83,13 +93,29 @@ const Main = ({customers, user, deleteCustomer, addCustomer, updateCustomer}: Pr
     const handleDisplayCustomerRow = (customer: Customer, index: number) => {
         return (
             <Grid key={index} className="grid">
-                <EditableSpan onBlur={event => handleChangeName(event, customer.id)} text={customer.name}/>
-                <EditableSpan onBlur={event => handleChangeEmail(event, customer.id)} text={customer.email}></EditableSpan>
-                <EditableSpan 
-                onBlur={event => handleChangePhone(event, customer.id)} 
-                text={customer.phone || "Click to add phone"}
-                variant={!customer.phone ? 'danger':''}
-                disableDefaultText={!customer.phone}></EditableSpan>
+                <div className="grid-children">
+                    <OnlyPhoneDiv>Name</OnlyPhoneDiv>
+                    <EditableSpan 
+                    variant="editable-span-align-right" 
+                    onBlur={event => handleChangeName(event, customer.id)} 
+                    text={customer.name}/>
+                </div>
+                <div className="grid-children">
+                    <OnlyPhoneDiv>Email</OnlyPhoneDiv>
+                    <EditableSpan 
+                    variant="editable-span-align-right" 
+                    onBlur={event => handleChangeEmail(event, customer.id)} 
+                    text={customer.email}></EditableSpan>
+                </div>
+                <div className="grid-children">
+                <OnlyPhoneDiv>Phone</OnlyPhoneDiv>
+                    <EditableSpan 
+                    onBlur={event => handleChangePhone(event, customer.id)} 
+                    text={customer.phone || "Click to add phone"}
+                    variant={!customer.phone ? 'danger editable-span-align-right':'editable-span-align-right'}
+                    disableDefaultText={!customer.phone}></EditableSpan>
+                </div>
+                
                 <div>
                     <Button variant="danger" onClick={() => handleDeleteCustomer(customer.id)}>Delete</Button>
                 </div>
