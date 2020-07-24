@@ -2,14 +2,13 @@ import React, { Fragment } from 'react';
 import Login from '../Login/Login';
 import { RootState } from '../../store/root.reducer';
 import { connect } from 'react-redux';
-import User from '../../models/User';
 import Main from '../Main/Main';
-import { loginState } from '../../store/data/user/user.reducer';
+import { loginState, UserState } from '../../store/data/user/user.reducer';
 import Spinner from '../ui-components/Spinner/Spinner';
 import styled from 'styled-components';
 
 export interface Props{
-    user: User;
+    user: UserState;
 };
 
 const Wrapper = ({ user }: Props) => {

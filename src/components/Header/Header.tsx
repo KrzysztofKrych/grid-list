@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { RootState } from "../../store/root.reducer";
 import { connect } from "react-redux";
-import User from "../../models/User";
 import Button from "../ui-components/Button/Button";
 import { Dispatch } from "redux";
 import { userLogoutActionInit } from "../../store/data/user/user.actions";
+import { UserState } from "../../store/data/user/user.reducer";
 
 export interface Props{
-    user: User;
+    user: UserState;
     signout: () => void;
 };
 

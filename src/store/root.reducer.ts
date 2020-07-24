@@ -1,11 +1,10 @@
 
 import Redux from "redux";
-import User from "../models/User";
-import userReducer, { initialUserState, UserAction } from "./data/user/user.reducer";
+import userReducer, { initialUserState, UserAction, UserState } from "./data/user/user.reducer";
 import customersReducer, { CustomersState, initialCustomersState, CustomersAction } from "./data/customers/customers.reducer";
 
 export interface RootState {
-    user: User;
+    user: UserState;
     customers: CustomersState;
 };
 

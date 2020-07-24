@@ -10,15 +10,14 @@ import { customersDeleteActionInit, customersAddActionInit, customersUpdateActio
 import { Dispatch } from "redux";
 import Header from "../Header/Header";
 import Input from "../ui-components/Input/Input";
-import User from "../../models/User";
 import { filterCustomersByValue, validators } from "../../helper";
 import "./Main.css";
-import UpdateConsumer from "../../models/UpdateCustomerBody";
 import UpdateConsumerBody from "../../models/UpdateCustomerBody";
+import { UserState } from "../../store/data/user/user.reducer";
 
 export interface Props {
     customers: Customer[];
-    user: User;
+    user: UserState;
     deleteCustomer: (id: string) => void;
     addCustomer: (customer: Customer) => void;
     updateCustomer: (id: string, body: UpdateConsumerBody) => void;
