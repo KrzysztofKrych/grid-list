@@ -96,6 +96,7 @@ const Main = ({customers, user, deleteCustomer, addCustomer, updateCustomer}: Pr
                 <div className="grid-children">
                     <OnlyPhoneDiv>Name</OnlyPhoneDiv>
                     <EditableSpan 
+                    inputClassName="phone-small"
                     variant="editable-span-align-right" 
                     onBlur={event => handleChangeName(event, customer.id)} 
                     text={customer.name}/>
@@ -103,6 +104,7 @@ const Main = ({customers, user, deleteCustomer, addCustomer, updateCustomer}: Pr
                 <div className="grid-children">
                     <OnlyPhoneDiv>Email</OnlyPhoneDiv>
                     <EditableSpan 
+                    inputClassName="phone-small"
                     variant="editable-span-align-right" 
                     onBlur={event => handleChangeEmail(event, customer.id)} 
                     text={customer.email}></EditableSpan>
@@ -110,6 +112,7 @@ const Main = ({customers, user, deleteCustomer, addCustomer, updateCustomer}: Pr
                 <div className="grid-children">
                 <OnlyPhoneDiv>Phone</OnlyPhoneDiv>
                     <EditableSpan 
+                    inputClassName="phone-small"
                     onBlur={event => handleChangePhone(event, customer.id)} 
                     text={customer.phone || "Click to add phone"}
                     variant={!customer.phone ? 'danger editable-span-align-right':'editable-span-align-right'}

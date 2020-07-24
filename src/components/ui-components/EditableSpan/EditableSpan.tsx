@@ -8,9 +8,10 @@ export interface Props {
     disableDefaultText?: boolean;
     variant?: string;
     className?:string;
+    inputClassName?: string;
 };
 
-const EditableSpan = ({text, onBlur, disableDefaultText = false, variant = "", className=""}: Props) => {
+const EditableSpan = ({text, onBlur, disableDefaultText = false, variant = "", className="", inputClassName=""}: Props) => {
     const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
     const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
@@ -24,7 +25,7 @@ const EditableSpan = ({text, onBlur, disableDefaultText = false, variant = "", c
 
     return (
         isEditMode ? 
-        <Input autofocus onBlur={handleBlur} defaultValue={!disableDefaultText ? text : ""}></Input> : 
+        <Input className={inputClassName} autofocus onBlur={handleBlur} defaultValue={!disableDefaultText ? text : ""}></Input> : 
         <TooltipContainer variant={variant} onlyOverflowed><span className={className} onClick={handleClick}>{text}</span></TooltipContainer>
     );
 };
