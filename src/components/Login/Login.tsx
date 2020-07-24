@@ -42,13 +42,15 @@ const StyledColumnDiv = styled.div`
 const Login = ({login, deleteErrorMessage, user}: Props) => {
     const [loginData, setLoginData] = useState<LoginData>({email: "", password: ""});
     const [showRegister, setShowRegister] = useState<boolean>(false);
+    
     const handleChangeLoginData = (setter: (loginData: LoginData) => void) => {
         setter(loginData);
-        setLoginData({...loginData});
+        setLoginData({...loginData});;
     }
+
     const handleLogin = () => {
         login(loginData);
-    }
+    };
 
     return (
         <Fragment>

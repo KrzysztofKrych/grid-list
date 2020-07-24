@@ -10,7 +10,7 @@ import { customersDeleteActionInit, customersAddActionInit, customersUpdateActio
 import { Dispatch } from "redux";
 import Header from "../Header/Header";
 import Input from "../ui-components/Input/Input";
-import { filterCustomersByValue, validators } from "../../helper";
+import { filterCustomersByValue, validators, sortByStringValue } from "../../helper";
 import "./Main.css";
 import UpdateConsumerBody from "../../models/UpdateCustomerBody";
 import { UserState } from "../../store/data/user/user.reducer";
@@ -138,10 +138,31 @@ const Main = ({customers, user, deleteCustomer, addCustomer, updateCustomer}: Pr
                     <Button variant="danger" onClick={() => handleToogleAddPanel(false)}>Cancel</Button>
                 </div>
             </Grid>}
-            <Grid className="grid">
-                <div>Name</div>
-                <div>Email</div>
-                <div>Phone</div>
+            <Grid className="grid table-head">
+                <div 
+                    onClick={() => 
+                    setFiltredCustomers(
+                            [...sortByStringValue((customer:Customer) => customer.name, filtredCustomers)]
+                        )
+                    }>
+                    Name
+                </div>
+                <div 
+                    onClick={() => 
+                        setFiltredCustomers(
+                            [...sortByStringValue((customer:Customer) => customer.email, filtredCustomers)]
+                        )
+                    }>
+                    Email
+                </div>
+                <div 
+                    onClick={() => 
+                        setFiltredCustomers(
+                            [...sortByStringValue((customer:Customer) => customer.phone, filtredCustomers)]
+                        )
+                    }>
+                    Phone
+                </div>
                 <div>Actions</div>
             </Grid>
             <List 
