@@ -10,6 +10,23 @@
     border-bottom: 1px solid var(--border);
     align-items: center;
 }
+
+.grid > * {
+    margin-bottom: 1rem;
+}
+
+.grid-children{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: .5rem 1rem;
+    border-bottom: 1px solid var(--border-darker);
+}
+
+.editable-span-align-right{
+    text-align: right;
+}
+
 .grid.table-head > *{
     cursor: pointer;
 }
@@ -17,8 +34,8 @@
 .add-panel{
     padding: 1rem;
 }
-.add-panel input{
-    margin: 0 .5rem;
+.add-panel > *{
+    margin:.5rem
 }
 
 .add-customer{
@@ -27,6 +44,9 @@
     margin: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+}
+.add-customer button{
+    margin-top: .5rem;
 }
 
 .actions{
@@ -43,9 +63,26 @@
     .grid {
         grid-template-columns: repeat(auto-fill, 25%);
     }
+    .grid > * {
+        margin-bottom: 0;
+    }
+    .grid-children{
+        justify-content: center;
+        margin: .5rem;
+        border-bottom: none;
+    }
     .actions{
         justify-content: flex-end;
         margin-top: 0;
+    }
+    .add-panel > *{
+        margin: 0 .5rem;
+    }
+    .editable-span-align-right{
+        text-align: center;
+    }
+    .add-customer button{
+        margin-top: 0
     }
 }
 
