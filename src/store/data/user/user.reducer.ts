@@ -1,6 +1,6 @@
 import Redux from "redux";
 import User from "../../../models/User";
-import UserActionType, { UserLoginActionSuccessModel, UserLoginActionInitModel, UserLogoutActionModel, UserRegisterActionModel, UserLoginActionErrorModel, UserDeleteErrorMessageActionModel } from "./user.actions";
+import UserActionType, { UserLoginActionSuccessModel,UserRegisterActionErrorModel, UserLoginActionInitModel, UserLogoutActionModel, UserRegisterActionModel, UserLoginActionErrorModel, UserDeleteLoginErrorMessageActionModel, UserDeleteRegisterErrorMessageActionModel } from "./user.actions";
 
 export enum loginState {
     LOGGEDIN = "LOGGEDIN",
@@ -10,12 +10,14 @@ export enum loginState {
 
 export interface UserState extends User {
     loginErrorMessage: string;
+    registerErrorMessage: string;
 }
 
 export const initialUserState: UserState = {
     isLoggedIn: loginState.WORKING,
     email: "",
-    loginErrorMessage: ""
+    loginErrorMessage: "",
+    registerErrorMessage: ""
 };
 
 export type UserAction = |
@@ -24,7 +26,9 @@ UserLoginActionSuccessModel |
 UserLogoutActionModel | 
 UserRegisterActionModel | 
 UserLoginActionErrorModel |
-UserDeleteErrorMessageActionModel;
+UserDeleteLoginErrorMessageActionModel |
+UserDeleteRegisterErrorMessageActionModel |
+UserRegisterActionErrorModel;
 
 const userReducer: Redux.Reducer<UserState, UserAction> = (state = initialUserState, action: UserAction) => {
     switch(action.type){
@@ -56,10 +60,22 @@ const userReducer: Redux.Reducer<UserState, UserAction> = (state = initialUserSt
                 loginErrorMessage: action.payload
             };
         }
-        case UserActionType.USER_DELETE_ERROR_MESSAGE_ACTION: {
+        case UserActionType.USER_REGISTER_ACTION_ERROR: {
+            return {
+                ...state,
+                registerErrorMessage: action.payload
+            };
+        }
+        case UserActionType.USER_DELETE_LOGIN_ERROR_MESSAGE_ACTION: {
             return {
                 ...state,
                 loginErrorMessage: ""
+            };
+        }
+        case UserActionType.USER_DELETE_REGISTER_ERROR_MESSAGE_ACTION: {
+            return {
+                ...state,
+                registerErrorMessage: ""
             };
         }
         default: return state;
